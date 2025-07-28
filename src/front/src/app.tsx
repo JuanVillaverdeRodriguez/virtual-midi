@@ -1,4 +1,17 @@
-import { createRoot } from 'react-dom/client';
+import './App.css'
+import { Button } from "@/components/ui/button"
 
-const root = createRoot(document.body);
-root.render(<h2>Hello from React!</h2>);
+function App() {
+
+  return (
+    <>
+      <div>
+        <div className="flex min-h-svh flex-col items-center justify-center">
+          <Button>Click me</Button>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default App
