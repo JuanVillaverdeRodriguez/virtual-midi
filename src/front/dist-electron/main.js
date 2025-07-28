@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -13,6 +13,7 @@ let win;
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+    frame: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.mjs")
     }
@@ -36,6 +37,13 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+ipcMain.on("minimize-window", () => {
+  var _a;
+  (_a = BrowserWindow.getFocusedWindow()) == null ? void 0 : _a.minimize();
+});
+ipcMain.on("close-window", () => {
+  app.quit();
 });
 app.whenReady().then(createWindow);
 export {

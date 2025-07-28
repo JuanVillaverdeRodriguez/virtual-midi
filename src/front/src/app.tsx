@@ -1,17 +1,20 @@
 import './App.css'
-import { Button } from "@/components/ui/button"
+
+import { HashRouter, Route, Routes } from 'react-router-dom'
+import MainPage from './pages/MainPage'
+import SecondPage from './pages/SecondPage'
 
 function App() {
-
   return (
-    <>
-      <div>
-        <div className="flex min-h-svh flex-col items-center justify-center">
-          <Button>Click me</Button>
-        </div>
-      </div>
-    </>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/second" element={<SecondPage />} />
+      </Routes>
+    </HashRouter>
   )
 }
+
+
 
 export default App
