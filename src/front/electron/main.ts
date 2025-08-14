@@ -1,7 +1,8 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, session } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import os from 'node:os'
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -29,7 +30,8 @@ let win: BrowserWindow | null
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
-    frame: false,
+    titleBarStyle: 'hidden',
+    ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },
@@ -74,4 +76,13 @@ ipcMain.on('close-window', () => {
   app.quit()
 })
 
-app.whenReady().then(createWindow)
+
+const reactDevToolsPath = path.join(
+  os.homedir(),
+  '\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\6.1.5_0'
+)
+
+app.whenReady().then(async () => {
+  console.log(reactDevToolsPath)
+  await session.defaultSession.loadExtension(reactDevToolsPath)
+}).then(createWindow)

@@ -3,10 +3,9 @@ import { Button } from "@/components/ui/button"
 
 export default function TopBar() {
     return (
-        <div className="flex justify-between items-center mb-8 bg-amber-500 topBar">
-            <h1 className="text-3xl font-bold">Virtual MIDI Sender</h1>
-            <Button variant="ghost" size="icon">
-                <SettingsIcon className="h-5 w-5" />
+        <div className="flex justify-between items-center mb-8 topBar">
+            <Button variant="ghost" size="icon" className="cursor-pointer">
+                <SettingsIcon className="" />
             </Button>
         </div>
     );

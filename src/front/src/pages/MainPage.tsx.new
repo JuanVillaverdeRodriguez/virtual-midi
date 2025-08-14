@@ -60,8 +60,8 @@ export default function MainPage() {
     }
 
     return (
-        <Layout
-            topBar={<TopBar />}
+        <Layout 
+            topBar={<TopBar />} 
             body={
                 <div className="flex space-x-64 p-6">
                     <div className="space-y-3 w-64">
